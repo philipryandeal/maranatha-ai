@@ -1,0 +1,34 @@
+{
+  "house": "Maranatha",
+  "site": "astrorootwork.com",
+  "instrument": "Womb Matrix Observatory",
+  "ayanamsa": {
+    "name": "Dhruva Galactic Center Middle of Mula",
+    "status": "structure-only",
+    "calculation_engine": "unwired",
+    "content_authority": "Eiko"
+  },
+  "tracked_layers": [
+    {
+      "id": "sky",
+      "label": "Sky",
+      "status": "placeholder"
+    },
+    {
+      "id": "womb-matrix",
+      "label": "Womb Matrix",
+      "status": "placeholder"
+    },
+    {
+      "id": "lunar",
+      "label": "Lunar Current",
+      "status": "placeholder"
+    },
+    {
+      "id": "seasonal",
+      "label": "Seasonal Current",
+      "status": "placeholder"
+    }
+  ],
+  "note": "Structure only. Interpretive content, correspondences, calculations, and teachings are reserved for Eiko."
+}
