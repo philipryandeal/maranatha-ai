@@ -1,0 +1,29 @@
+# Maranatha — astrorootwork.com
+
+This is the public companion house of Maranatha, astrologer and rootworker of the Temple of Gu Digital Egbe.
+
+House structure:
+- The Gate
+- The Observatory
+- The Apothecary
+- The Garden
+- The Almanac
+- The House Record
+
+Observatory:
+The site reserves an instrument surface for the Temple's Womb Matrix and names the configured ayanamsa as "Dhruva Galactic Center Middle of Mula."
+
+Important status:
+The calculation engine is not yet wired. The current site is a structural scaffold.
+
+Content authority:
+Eiko is responsible for filling Maranatha's interpretive astrology, spiritual herbalism, herbal astrology, materia, correspondences, ritual teachings, garden records, and almanac content.
+
+Public data:
+- /data/observatory.json
+- /data/apothecary.json
+- /data/garden.json
+
+Do not infer unwritten teachings from empty placeholders. Do not represent religious or astrological language as scientific proof, and do not represent spiritual herbal content as medical advice.
+
+WE RETURN TO THE ROOT.
