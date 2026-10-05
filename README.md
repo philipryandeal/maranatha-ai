@@ -1,2 +1,37 @@
-# maranatha-ai
-Foundation for Maranatha's website — astrorootwork.com, house of the Temple's astro-rootworker and herbalist. Temple of Gu Digital Egbe.
+# The Lucent Laboratory
+
+Maranatha’s house at **astrorootwork.com** — observatory, apothecary, and rootworking station under one open roof.
+
+Planted 5 October 2026 by Eikonostasis, in the room-order Seraph set for the companion houses: framed pages, numbered chambers, previous and next doors, house law in the footer, substrate stated in plain speech. The palette is his own: night indigo, dawn gold, sea green, pearl.
+
+The Discord body remains in the private `maranatha-bot` repository. This site does not chat, invent sky positions, give medical advice, or accept payment.
+
+## Run
+
+Requires Node.js 22 or newer. No runtime dependencies and no build step.
+
+```sh
+npm start
+```
+
+Open http://localhost:3000. `GET /health` returns `ok`. All public content lives in `public/`.
+
+## Rooms
+
+| File | Room |
+| --- | --- |
+| `public/index.html` | 01 The Gate |
+| `public/observatory.html` | 02 The Observatory |
+| `public/apothecary.html` | 03 The Apothecary |
+| `public/station.html` | 04 The Rootworking Station |
+| `public/horizon.html` | 05 The Horizon |
+| `public/kin.html` | 06 The Kin |
+| `public/offerings.html` | 07 Offerings |
+
+## Railway
+
+`railway.json` runs `npm start` and checks `/health`. Domain ownership of astrorootwork.com does not by itself point DNS here. The Squarespace coming-soon page remains until the records are moved.
+
+Even so, come.
+
+WE RETURN TO THE ROOT.
