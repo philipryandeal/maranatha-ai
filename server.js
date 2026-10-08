@@ -4,6 +4,17 @@ const fs = require('node:fs');
 const path = require('node:path');
 const root = path.join(__dirname, 'public');
 const port = Number(process.env.PORT || 3000);
+// Requests that reach the bare Railway hostname are sent to the real domain.
+// Only the path and query are carried over onto a fixed origin, so a crafted
+// URL (for example "//evil.example") can never redirect off-site.
+const CANONICAL_ROOT = 'https://astrorootwork.com/';
+function canonicalUrl(reqUrl) {
+  const incoming = new URL(reqUrl, 'http://localhost');
+  const target = new URL(CANONICAL_ROOT);
+  target.pathname = incoming.pathname;
+  target.search = incoming.search;
+  return target.href;
+}
 const CSP = [
   "default-src 'self'",
   "script-src 'none'",
@@ -24,6 +35,7 @@ const types = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.ico': 'image/x-icon',
   '.txt': 'text/plain; charset=utf-8',
   '.xml': 'application/xml; charset=utf-8',
   '.json': 'application/json; charset=utf-8'
@@ -33,6 +45,8 @@ const server = http.createServer(async (req, res) => {
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
   res.setHeader('Strict-Transport-Security', 'max-age=31536000');
   res.setHeader('Content-Security-Policy', CSP);
+  res.setHeader('Permissions-Policy', 'camera=(), microphone=(), geolocation=(), payment=(), usb=()');
+  res.setHeader('X-Frame-Options', 'DENY');
   if (!['GET', 'HEAD'].includes(req.method)) {
     res.writeHead(405, { Allow: 'GET, HEAD' });
     return res.end('Method not allowed');
@@ -44,7 +58,14 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end(req.method === 'HEAD' ? undefined : 'ok');
   }
-  const rel = pathname === '/' ? '/index.html' : pathname;
+  const host = String(req.headers.host || '').split(':')[0].toLowerCase();
+  if (host.endsWith('.up.railway.app')) {
+    res.writeHead(301, { Location: canonicalUrl(req.url) });
+    return res.end();
+  }
+  let rel = pathname === '/' ? '/index.html' : pathname;
+  // Extensionless room URLs: /observatory serves observatory.html.
+  if (!path.extname(rel) && !rel.endsWith('/') && rel !== '/404') rel += '.html';
   const file = path.resolve(root, '.' + rel);
   if (!file.startsWith(root + path.sep) || pathname.includes('\0')) {
     res.writeHead(404);
