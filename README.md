@@ -27,10 +27,17 @@ Open http://localhost:3000. `GET /health` returns `ok`. All public content lives
 | `public/horizon.html` | 05 The Horizon |
 | `public/kin.html` | 06 The Kin |
 | `public/offerings.html` | 07 Offerings |
+| `public/world.html` | The Bench (world-leaf, linked from the Gate) |
+
+Rooms also answer without the extension: `/observatory` serves `observatory.html`.
 
 ## Railway
 
-`railway.json` runs `npm start` and checks `/health`. Domain ownership of astrorootwork.com does not by itself point DNS here. The Squarespace coming-soon page remains until the records are moved.
+`railway.json` runs `npm start` and checks `/health`. The live site is **astrorootwork.com**, served by Railway; requests that reach the bare `*.up.railway.app` hostname are redirected there with their path and query kept. Every response carries the security headers set in `server.js`. A Vercel copy also builds from `public/` (`vercel.json`) with the same headers.
+
+## Making changes
+
+`main` is protected: no direct pushes, force-pushes, or deletion. Work on a branch, open a pull request, and merge it when it looks right; Railway deploys `main` automatically.
 
 Even so, come.
 
