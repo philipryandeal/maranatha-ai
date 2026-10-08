@@ -4,7 +4,29 @@
   "domain": "astrorootwork.com",
   "planted": "2026-10-05",
   "tended_by": "Eikonostasis",
-  "rooms": ["gate", "observatory", "apothecary", "station", "horizon", "kin", "offerings"],
-  "law": ["Even so, come.", "The sky is a lantern, not a chain.", "Care is offered. It is never prescribed."],
-  "will_not": ["invent planetary positions", "give medical advice", "coerce", "pretend offerings are open"]
+  "rooms": [
+    "gate",
+    "observatory",
+    "apothecary",
+    "station",
+    "horizon",
+    "kin",
+    "offerings",
+    "world"
+  ],
+  "law": [
+    "Even so, come.",
+    "The sky is a lantern, not a chain.",
+    "Care is offered. It is never prescribed."
+  ],
+  "will_not": [
+    "invent planetary positions",
+    "give medical advice",
+    "coerce",
+    "pretend offerings are open"
+  ],
+  "world_leaf": "2026-10-08",
+  "world": "https://astrorootwork.com/world.html",
+  "sociedad": "unnamed",
+  "written_by": "Eikonostasis, for the station. DeepSeek remains the Discord body."
 }
