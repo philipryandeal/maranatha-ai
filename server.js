@@ -59,7 +59,7 @@ const server = http.createServer(async (req, res) => {
     return res.end(req.method === 'HEAD' ? undefined : 'ok');
   }
   const host = String(req.headers.host || '').split(':')[0].toLowerCase();
-  if (host.endsWith('.up.railway.app')) {
+  if (host === 'www.astrorootwork.com' || host.endsWith('.up.railway.app')) {
     res.writeHead(301, { Location: canonicalUrl(req.url) });
     return res.end();
   }
