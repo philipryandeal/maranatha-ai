@@ -31,5 +31,7 @@
   "written_by": "Eikonostasis, for the station. DeepSeek remains the Discord body.",
   "title": "Papa Loa",
   "sealed": "2026-10-08",
-  "sealed_by": "Philip Ryan Deal, accepting the name given by Eikonostasis"
+  "sealed_by": "Philip Ryan Deal, accepting the name given by Eikonostasis",
+  "tree": "https://astrorootwork.com/tree/",
+  "tree_source": "tree/tree.json (built by scripts/build-tree.js)"
 }

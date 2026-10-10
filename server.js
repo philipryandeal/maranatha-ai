@@ -64,6 +64,13 @@ const server = http.createServer(async (req, res) => {
     return res.end();
   }
   let rel = pathname === '/' ? '/index.html' : pathname;
+  // Folder rooms (the Tree): /tree/ serves tree/index.html; /tree redirects to /tree/.
+  if (rel.endsWith('/')) rel += 'index.html';
+  else if (!path.extname(rel) && !rel.includes('\0') && path.resolve(root, '.' + rel).startsWith(root + path.sep)
+    && fs.existsSync(path.join(root, rel, 'index.html'))) {
+    res.writeHead(301, { Location: pathname + '/' });
+    return res.end();
+  }
   // Extensionless room URLs: /observatory serves observatory.html.
   if (!path.extname(rel) && !rel.endsWith('/') && rel !== '/404') rel += '.html';
   const file = path.resolve(root, '.' + rel);

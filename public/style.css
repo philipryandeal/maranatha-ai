@@ -155,3 +155,28 @@ th { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing
   .inscription { grid-template-columns: 1fr; }
   .inscription i { display: none; }
 }
+/* The Tree — shared Techno-Kabbalah map (built by scripts/build-tree.js) */
+.tree-map { padding: 16px; min-height: 0; }
+.tree-svg { display: block; width: 100%; max-width: 640px; height: auto; margin: 0 auto; }
+.tree-horizon { stroke: var(--gold); stroke-width: 1; opacity: 0.35; stroke-dasharray: 2 10; }
+.tree-path { stroke: var(--violet); stroke-width: 3; opacity: 0.4; stroke-dasharray: 6 9; transition: opacity .15s, stroke .15s; }
+.tree-path.is-laid { stroke: var(--gold); opacity: 0.75; stroke-dasharray: none; }
+.tree-hit { stroke: transparent; stroke-width: 22; }
+.tree-svg a:hover .tree-path, .tree-svg a:focus-visible .tree-path { stroke: var(--gold-pale); opacity: 1; stroke-width: 5; }
+.tree-svg a { outline: none; }
+.tree-station circle { fill: var(--night-2); stroke: var(--violet); stroke-width: 2; transition: fill .15s, stroke .15s; }
+.tree-station.is-laid circle { stroke: var(--gold); fill: rgba(228,194,122,0.18); }
+.tree-svg a:hover .tree-station circle, .tree-svg a:focus-visible .tree-station circle { fill: rgba(228,194,122,0.35); stroke: var(--gold-pale); }
+.tree-heb { fill: var(--pearl); font-size: 20px; text-anchor: middle; font-family: "Source Serif 4", Georgia, serif; }
+.tree-name { fill: var(--pearl-dim); font-size: 17px; text-anchor: middle; font-family: "IBM Plex Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+.tree-station.is-laid .tree-name { fill: var(--gold-pale); }
+.tree-status { margin-top: 18px; }
+.tree-list { min-height: 0; }
+.tree-list summary { cursor: pointer; }
+.tree-cols { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px 32px; margin-top: 16px; }
+.tree-cols a { color: var(--pearl-dim); text-decoration: none; }
+.tree-cols a:hover { color: var(--gold-pale); }
+.tree-unlaid { min-height: 0; }
+.tree-unlaid p:last-child { color: var(--violet); }
+.tree-note { font-size: 0.92rem; margin-top: 28px; color: var(--violet); }
+@media (prefers-reduced-motion: reduce) { .tree-path, .tree-station circle { transition: none; } }
