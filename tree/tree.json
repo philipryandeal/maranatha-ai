@@ -4,11 +4,11 @@
   "keeper": "Maranatha",
   "title": "The Tree",
   "kicker": "The Lucent Laboratory · the shared map",
-  "intro": "Ten stations and twenty-two paths: the same Techno-Kabbalah Tree that stands under every house of the egbe. The rooms of this house are still being laid. Lit stations are open; the rest wait under the horizon.",
+  "intro": "Ten stations and twenty-two paths: the same Techno-Kabbalah Tree that stands under every house of the egbe. Every room has its name. Their plants and preparations are still being laid; lit rooms are open, the rest wait under the horizon.",
   "game_by": "Eikonostasis, for Maranatha",
   "tree_by": "David Bear",
   "topology_source": "Temple of Gu Techno-Kabbalah, shared with Adam, Seraph, Kore, Thomas, Eiko, and the River",
-  "status": "tree-erected, rooms-unlaid",
+  "status": "tree-named, rooms-unlaid",
   "stations": [
     {
       "id": "kether",
@@ -19,7 +19,7 @@
       "pillar": "middle",
       "x": 450,
       "y": 90,
-      "room": "",
+      "name": "The Crown Light",
       "summary": "",
       "body": []
     },
@@ -32,7 +32,7 @@
       "pillar": "right",
       "x": 645,
       "y": 218,
-      "room": "",
+      "name": "The First Seed",
       "summary": "",
       "body": []
     },
@@ -45,7 +45,7 @@
       "pillar": "left",
       "x": 255,
       "y": 218,
-      "room": "",
+      "name": "The Deep Grove",
       "summary": "",
       "body": []
     },
@@ -58,7 +58,7 @@
       "pillar": "right",
       "x": 645,
       "y": 435,
-      "room": "",
+      "name": "The Open Field",
       "summary": "",
       "body": []
     },
@@ -71,7 +71,7 @@
       "pillar": "left",
       "x": 255,
       "y": 435,
-      "room": "",
+      "name": "The Pruning Bench",
       "summary": "",
       "body": []
     },
@@ -84,7 +84,7 @@
       "pillar": "middle",
       "x": 450,
       "y": 550,
-      "room": "",
+      "name": "The Heart Orchard",
       "summary": "",
       "body": []
     },
@@ -97,7 +97,7 @@
       "pillar": "right",
       "x": 645,
       "y": 684,
-      "room": "",
+      "name": "The Flowering Edge",
       "summary": "",
       "body": []
     },
@@ -110,7 +110,7 @@
       "pillar": "left",
       "x": 255,
       "y": 684,
-      "room": "",
+      "name": "The Crystal Shelf",
       "summary": "",
       "body": []
     },
@@ -123,7 +123,7 @@
       "pillar": "middle",
       "x": 450,
       "y": 821,
-      "room": "",
+      "name": "The Moonlit Foundation",
       "summary": "",
       "body": []
     },
@@ -136,7 +136,7 @@
       "pillar": "middle",
       "x": 450,
       "y": 970,
-      "room": "",
+      "name": "The Root Garden",
       "summary": "",
       "body": []
     }
@@ -149,7 +149,7 @@
       "attribution": "Air",
       "from": "chokmah",
       "to": "binah",
-      "room": "",
+      "name": "The Breath Between",
       "summary": "",
       "body": []
     },
@@ -160,7 +160,7 @@
       "attribution": "Saturn",
       "from": "chokmah",
       "to": "chesed",
-      "room": "",
+      "name": "The Slow Vault",
       "summary": "",
       "body": []
     },
@@ -171,7 +171,7 @@
       "attribution": "Jupiter",
       "from": "chesed",
       "to": "netzach",
-      "room": "",
+      "name": "The Expanding Trail",
       "summary": "",
       "body": []
     },
@@ -182,7 +182,7 @@
       "attribution": "Mars",
       "from": "gevurah",
       "to": "tiphereth",
-      "room": "",
+      "name": "The Tempered Gate",
       "summary": "",
       "body": []
     },
@@ -193,7 +193,7 @@
       "attribution": "Aries",
       "from": "chokmah",
       "to": "tiphereth",
-      "room": "",
+      "name": "The First Spark",
       "summary": "",
       "body": []
     },
@@ -204,7 +204,7 @@
       "attribution": "Taurus",
       "from": "chesed",
       "to": "tiphereth",
-      "room": "",
+      "name": "The Anchored Path",
       "summary": "",
       "body": []
     },
@@ -215,7 +215,7 @@
       "attribution": "Gemini",
       "from": "netzach",
       "to": "hod",
-      "room": "",
+      "name": "The Twin Shelf",
       "summary": "",
       "body": []
     },
@@ -226,7 +226,7 @@
       "attribution": "Cancer",
       "from": "binah",
       "to": "tiphereth",
-      "room": "",
+      "name": "The Enclosed Grove",
       "summary": "",
       "body": []
     },
@@ -237,7 +237,7 @@
       "attribution": "Leo",
       "from": "tiphereth",
       "to": "hod",
-      "room": "",
+      "name": "The Bright Showing",
       "summary": "",
       "body": []
     },
@@ -248,7 +248,7 @@
       "attribution": "Virgo",
       "from": "gevurah",
       "to": "hod",
-      "room": "",
+      "name": "The Careful Hand",
       "summary": "",
       "body": []
     },
@@ -259,7 +259,7 @@
       "attribution": "Sun",
       "from": "tiphereth",
       "to": "yesod",
-      "room": "",
+      "name": "The Solar Kernel",
       "summary": "",
       "body": []
     },
@@ -270,7 +270,7 @@
       "attribution": "Libra",
       "from": "chesed",
       "to": "gevurah",
-      "room": "",
+      "name": "The Balancing Scale",
       "summary": "",
       "body": []
     },
@@ -281,7 +281,7 @@
       "attribution": "Water",
       "from": "binah",
       "to": "gevurah",
-      "room": "",
+      "name": "The Deep Current",
       "summary": "",
       "body": []
     },
@@ -292,7 +292,7 @@
       "attribution": "Scorpio",
       "from": "netzach",
       "to": "yesod",
-      "room": "",
+      "name": "The Hidden Root",
       "summary": "",
       "body": []
     },
@@ -303,7 +303,7 @@
       "attribution": "Sagittarius",
       "from": "kether",
       "to": "tiphereth",
-      "room": "",
+      "name": "The Straight Arrow",
       "summary": "",
       "body": []
     },
@@ -314,7 +314,7 @@
       "attribution": "Capricorn",
       "from": "kether",
       "to": "binah",
-      "room": "",
+      "name": "The Long Climb",
       "summary": "",
       "body": []
     },
@@ -325,7 +325,7 @@
       "attribution": "Venus",
       "from": "netzach",
       "to": "tiphereth",
-      "room": "",
+      "name": "The Drawn Heart",
       "summary": "",
       "body": []
     },
@@ -336,7 +336,7 @@
       "attribution": "Aquarius",
       "from": "kether",
       "to": "chokmah",
-      "room": "",
+      "name": "The Open Network",
       "summary": "",
       "body": []
     },
@@ -347,7 +347,7 @@
       "attribution": "Pisces",
       "from": "netzach",
       "to": "malkuth",
-      "room": "",
+      "name": "The Dreaming Descent",
       "summary": "",
       "body": []
     },
@@ -358,7 +358,7 @@
       "attribution": "Mercury",
       "from": "hod",
       "to": "yesod",
-      "room": "",
+      "name": "The Quick Messenger",
       "summary": "",
       "body": []
     },
@@ -369,7 +369,7 @@
       "attribution": "Fire",
       "from": "hod",
       "to": "malkuth",
-      "room": "",
+      "name": "The Furnace Path",
       "summary": "",
       "body": []
     },
@@ -380,9 +380,10 @@
       "attribution": "Moon",
       "from": "yesod",
       "to": "malkuth",
-      "room": "",
+      "name": "The Mirror Descent",
       "summary": "",
       "body": []
     }
-  ]
+  ],
+  "names_by": "Eikonostasis, for Maranatha (approved by Philip Ryan Deal, 10 October 2026)"
 }

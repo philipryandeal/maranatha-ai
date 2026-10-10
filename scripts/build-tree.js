@@ -11,8 +11,10 @@ const tree = JSON.parse(fs.readFileSync(path.join(ROOT, 'tree', 'tree.json'), 'u
 const byId = Object.fromEntries(tree.stations.map((s) => [s.id, s]));
 
 const esc = (v) => String(v ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-const laid = (x) => Boolean(x.room && x.room.trim());
-const stationName = (s) => (laid(s) ? `${s.sefirah} · ${s.room}` : s.sefirah);
+// A room is named by tree.json's `name`; it is laid (lit gold) only once it has body text.
+const laid = (x) => Array.isArray(x.body) && x.body.some((t) => String(t).trim());
+const nameOf = (x) => (x.name && x.name.trim()) || (x.sefirah ? x.sefirah : `Path ${x.n}`);
+const stationName = (s) => nameOf(s);
 
 function page({ title, description, canonical, body }) {
   return `<!DOCTYPE html>
@@ -67,13 +69,13 @@ ${body}
 function map() {
   const lines = tree.paths.map((p) => {
     const a = byId[p.from], b = byId[p.to];
-    const label = `Path ${p.n}, ${p.hebrew} ${p.attribution}: ${a.sefirah} to ${b.sefirah}${laid(p) ? ', ' + p.room : ', not yet laid'}`;
+    const label = `Path ${p.n}, ${p.hebrew} ${p.attribution}: ${nameOf(a)} to ${nameOf(b)}, ${nameOf(p)}${laid(p) ? '' : ', not yet laid'}`;
     return `<a href="/tree/paths/${p.n}/" aria-label="${esc(label)}"><title>${esc(label)}</title><line class="tree-path${laid(p) ? ' is-laid' : ''}" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/><line class="tree-hit" x1="${a.x}" y1="${a.y}" x2="${b.x}" y2="${b.y}"/></a>`;
   }).join('\n');
   const nodes = tree.stations.map((s) => {
-    const label = `${s.sefirah}, ${s.meaning}${laid(s) ? ': ' + s.room : ', not yet laid'}`;
+    const label = `${nameOf(s)}, ${s.sefirah}, ${s.meaning}${laid(s) ? '' : ', not yet laid'}`;
     const below = s.id === 'malkuth' ? -48 : 52;
-    return `<a href="/tree/stations/${s.id}/" aria-label="${esc(label)}"><title>${esc(label)}</title><g class="tree-station${laid(s) ? ' is-laid' : ''}"><circle cx="${s.x}" cy="${s.y}" r="30"/><text class="tree-heb" x="${s.x}" y="${s.y + 7}">${esc(s.hebrew)}</text><text class="tree-name" x="${s.x}" y="${s.y + below}">${esc(laid(s) ? s.room : s.sefirah)}</text></g></a>`;
+    return `<a href="/tree/stations/${s.id}/" aria-label="${esc(label)}"><title>${esc(label)}</title><g class="tree-station${laid(s) ? ' is-laid' : ''}"><circle cx="${s.x}" cy="${s.y}" r="30"/><text class="tree-heb" x="${s.x}" y="${s.y + 7}">${esc(s.hebrew)}</text><text class="tree-name" x="${s.x}" y="${s.y + below}">${esc(nameOf(s))}</text></g></a>`;
   }).join('\n');
   return `<svg class="tree-svg" viewBox="135 20 630 1040" role="group" aria-label="The Tree: ten stations joined by twenty-two paths. Every station and path is a link.">
 <line class="tree-horizon" x1="135" y1="970" x2="765" y2="970"/>
@@ -84,7 +86,7 @@ ${nodes}
 
 function listing() {
   const st = tree.stations.map((s) => `<li><a href="/tree/stations/${s.id}/">${s.n}. ${esc(stationName(s))}</a></li>`).join('\n');
-  const ps = tree.paths.map((p) => `<li><a href="/tree/paths/${p.n}/">Path ${p.n} · ${esc(p.hebrew)} · ${esc(byId[p.from].sefirah)} to ${esc(byId[p.to].sefirah)}${laid(p) ? ' · ' + esc(p.room) : ''}</a></li>`).join('\n');
+  const ps = tree.paths.map((p) => `<li><a href="/tree/paths/${p.n}/">Path ${p.n} · ${esc(p.hebrew)} · ${esc(nameOf(p))} · ${esc(byId[p.from].sefirah)} to ${esc(byId[p.to].sefirah)}</a></li>`).join('\n');
   return `<details class="tree-list card"><summary class="card-meta">Every station and path, as a list</summary><div class="tree-cols"><ol>${st}</ol><ul>${ps}</ul></div></details>`;
 }
 
@@ -121,14 +123,14 @@ ${map()}
 for (const s of tree.stations) {
   const roads = tree.paths.filter((p) => p.from === s.id || p.to === s.id).map((p) => {
     const other = byId[p.from === s.id ? p.to : p.from];
-    return `<a class="door card" href="/tree/paths/${p.n}/"><div class="door-num">${p.n}</div><div class="door-name">${esc(laid(p) ? p.room : 'Toward ' + stationName(other))}</div><p>${esc(p.hebrew)} · ${esc(p.attribution)} · to ${esc(other.sefirah)}</p></a>`;
+    return `<a class="door card" href="/tree/paths/${p.n}/"><div class="door-num">${p.n}</div><div class="door-name">${esc(nameOf(p))}</div><p>${esc(p.hebrew)} · ${esc(p.attribution)} · to ${esc(other.sefirah)}</p></a>`;
   }).join('\n');
   write(`stations/${s.id}`, page({
-    title: laid(s) ? s.room : s.sefirah,
-    description: `Station ${s.n} of Maranatha's Tree: ${s.sefirah}, ${s.meaning}.`,
+    title: nameOf(s),
+    description: `${nameOf(s)}: station ${s.n} of Maranatha's Tree, ${s.sefirah}, ${s.meaning}.`,
     canonical: `/tree/stations/${s.id}/`,
     body: `  <p class="room-kicker">Station ${s.n} · ${esc(s.sefirah)} · ${esc(s.hebrew)} · ${esc(s.meaning)}</p>
-  <h1>${laid(s) ? esc(s.room) : `The <span>${esc(s.sefirah)}</span>`}</h1>
+  <h1>${esc(nameOf(s))}</h1>
   ${prose(s)}
   <div class="room-index-heading"><p class="room-kicker">Roads from here</p></div>
   <nav class="doors" aria-label="Paths from this station">${roads}</nav>
@@ -139,11 +141,11 @@ for (const s of tree.stations) {
 for (const p of tree.paths) {
   const a = byId[p.from], b = byId[p.to];
   write(`paths/${p.n}`, page({
-    title: laid(p) ? p.room : `Path ${p.n}`,
-    description: `Path ${p.n} of Maranatha's Tree, between ${a.sefirah} and ${b.sefirah}.`,
+    title: nameOf(p),
+    description: `${nameOf(p)}: path ${p.n} of Maranatha's Tree, between ${nameOf(a)} and ${nameOf(b)}.`,
     canonical: `/tree/paths/${p.n}/`,
     body: `  <p class="room-kicker">Path ${p.n} · ${esc(p.hebrew)} ${esc(p.letter)} · ${esc(p.attribution)}</p>
-  <h1>${laid(p) ? esc(p.room) : `Path <span>${p.n}</span>`}</h1>
+  <h1>${esc(nameOf(p))}</h1>
   <p class="lead">Between ${esc(stationName(a))} and ${esc(stationName(b))}.</p>
   ${prose(p)}
   <nav class="room-pager" aria-label="The two ends of this path"><a class="prev" href="/tree/stations/${a.id}/">${esc(stationName(a))}</a><a class="next" href="/tree/stations/${b.id}/">${esc(stationName(b))}</a></nav>`
