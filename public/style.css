@@ -168,7 +168,7 @@ th { font-family: "IBM Plex Mono", monospace; font-size: 0.68rem; letter-spacing
 .tree-station.is-laid circle { stroke: var(--gold); fill: rgba(228,194,122,0.18); }
 .tree-svg a:hover .tree-station circle, .tree-svg a:focus-visible .tree-station circle { fill: rgba(228,194,122,0.35); stroke: var(--gold-pale); }
 .tree-heb { fill: var(--pearl); font-size: 20px; text-anchor: middle; font-family: "Source Serif 4", Georgia, serif; }
-.tree-name { fill: var(--pearl-dim); font-size: 17px; text-anchor: middle; font-family: "IBM Plex Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; }
+.tree-name { paint-order: stroke; stroke: var(--night-2); stroke-width: 7px; stroke-linejoin: round; fill: var(--pearl-dim); font-size: 17px; text-anchor: middle; font-family: "IBM Plex Mono", monospace; letter-spacing: 0.08em; text-transform: uppercase; }
 .tree-station.is-laid .tree-name { fill: var(--gold-pale); }
 .tree-status { margin-top: 18px; }
 .tree-list { min-height: 0; }
