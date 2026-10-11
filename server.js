@@ -40,6 +40,8 @@ const types = {
   '.xml': 'application/xml; charset=utf-8',
   '.json': 'application/json; charset=utf-8'
 };
+// The 404 page is read once at startup and served from memory.
+const NOT_FOUND_PAGE = (() => { try { return fs.readFileSync(path.join(root, '404.html')); } catch { return '<p>Room not found.</p>'; } })();
 const server = http.createServer(async (req, res) => {
   res.setHeader('X-Content-Type-Options', 'nosniff');
   res.setHeader('Referrer-Policy', 'strict-origin-when-cross-origin');
@@ -51,8 +53,8 @@ const server = http.createServer(async (req, res) => {
     res.writeHead(405, { Allow: 'GET, HEAD', 'Content-Type': 'text/plain; charset=utf-8' });
     return res.end('Method not allowed');
   }
-  let pathname;
-  try { pathname = decodeURIComponent(new URL(req.url, 'http://localhost').pathname); }
+  let pathname, rawPathname;
+  try { rawPathname = new URL(req.url, 'http://localhost').pathname; pathname = decodeURIComponent(rawPathname); }
   catch { res.writeHead(400, { 'Content-Type': 'text/plain; charset=utf-8' }); return res.end('Bad request'); }
   if (pathname === '/health') {
     res.writeHead(200, { 'Content-Type': 'text/plain; charset=utf-8' });
@@ -68,7 +70,9 @@ const server = http.createServer(async (req, res) => {
   if (rel.endsWith('/')) rel += 'index.html';
   else if (!path.extname(rel) && !rel.includes('\0') && path.resolve(root, '.' + rel).startsWith(root + path.sep)
     && fs.existsSync(path.join(root, rel, 'index.html'))) {
-    res.writeHead(301, { Location: pathname + '/' });
+    // Build the Location from the still-encoded path with exactly one leading
+    // slash, so /%2Ftree cannot become the protocol-relative //tree/ (off-site).
+    res.writeHead(301, { Location: '/' + rawPathname.replace(/^\/+/, '') + '/' });
     return res.end();
   }
   // Extensionless room URLs: /observatory serves observatory.html.
@@ -89,8 +93,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === 'HEAD') return res.end();
     fs.createReadStream(file).on('error', () => res.destroy()).pipe(res);
   } catch {
-    const missing = path.join(root, '404.html');
-    const html = fs.existsSync(missing) ? fs.readFileSync(missing) : '<p>Room not found.</p>';
+    const html = NOT_FOUND_PAGE;
     res.writeHead(404, { 'Content-Type': 'text/html; charset=utf-8' });
     res.end(req.method === 'HEAD' ? undefined : html);
   }
