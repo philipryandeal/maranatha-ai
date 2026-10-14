@@ -46,7 +46,6 @@ function page({ title, description, canonical, body }) {
 <a href="/station">Station</a>
 <a href="/horizon">Horizon</a>
 <a href="/kin">Kin</a>
-<a href="/offerings">Offerings</a>
 <a href="/tree/"${canonical === '/tree/' ? ' class="current" aria-current="page"' : ''}>Tree</a></nav>
 </header>
 <main id="main" class="page" tabindex="-1">
